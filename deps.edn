@@ -8,8 +8,13 @@
          :exec-fn cognitect.test-runner.api/test}
 :cljs {:extra-paths ["test"]
          :extra-deps {org.clojure/clojurescript {:mvn/version "1.11.132"}}}
-  ;; 公開サイトのマークアップ（site/inkan/page.cljc）。kotoba-ui を引くので
+  ;; 公開サイトのマークアップ（site/inkan/page.cljc）。design system を引くので
   ;; ライブラリ本体の :paths からは外してある — inkan.geometry / inkan.svg は
   ;; clojure.string しか引かない状態を保つ。
+  ;;
+  ;; UI は kotoba-ui ではなく DADS（デジタル庁デザインシステム）。印影は
+  ;; 印鑑登録・契約・行政手続きの文脈そのもので、jp-go-dds はまさにその用途の
+  ;; ための明示的な opt-out 先（オーナー指示 2026-07-30、ADR-2607301300）。
   :site {:extra-paths ["site"]
-         :extra-deps {io.github.kotoba-lang/kotoba-ui {:local/root "../../kotoba-lang/kotoba-ui"}}}}}
+         :extra-deps {io.github.kotoba-lang/jp-go-dds
+                      {:local/root "../../kotoba-lang/jp-go-digital-design-system"}}}}}
