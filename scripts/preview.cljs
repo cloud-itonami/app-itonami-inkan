@@ -1,0 +1,49 @@
+;; 全 kind × 候補書体の印影を1枚の HTML に並べる目視確認用ページを作る。
+;;
+;; 幾何テスト（`inkan.geometry-test`）は「枠から出ない」「読み順が正しい」までしか
+;; 保証しない —— **印章に見えるか**は測っていない。そこは人が見るしかないので、
+;; 見るための面をコードで用意しておく。
+;;
+;; Run:
+;;   nbb --classpath src scripts/preview.cljs > /tmp/inkan-preview.html
+(require '[inkan.geometry :as geometry]
+         '[inkan.svg :as svg]
+         '[clojure.string :as str])
+
+(def fonts
+  ["Shippori Mincho" "Zen Old Mincho" "Yuji Syuku" "Yuji Boku" "Noto Serif JP"])
+
+(def samples
+  [{:kind :round-vertical :text "山田太郎" :size-mm 18.0}
+   {:kind :round-vertical :text "鈴木" :size-mm 13.5}
+   {:kind :round-horizontal :text "山田" :size-mm 15.0}
+   {:kind :round-corporate :text "株式会社山田商店" :inner-text "代表取締役之印" :size-mm 18.0}
+   {:kind :round-dated :text "検収" :inner-text "経理部" :date "2026.07.30" :size-mm 18.0}
+   {:kind :square-1 :text "山田之印" :size-mm 21.0}
+   {:kind :square-2 :text "株式会社山田商店" :size-mm 21.0}
+   {:kind :square-3 :text "株式会社山田商店之印" :size-mm 24.0}])
+
+(defn cell [font spec]
+  (str "<figure><div class=\"seal\">"
+       (svg/seal (assoc spec :font-family font) {:px-per-mm 6})
+       "</div><figcaption>" (name (:kind spec)) "<br><small>" font "</small></figcaption></figure>"))
+
+(println
+ (str "<!doctype html><html lang=\"ja\"><head><meta charset=\"utf-8\">"
+      "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">"
+      "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>"
+      "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?"
+      (str/join "&" (map #(str "family=" (str/replace % " " "+")) fonts))
+      "&display=block\">"
+      "<style>body{font-family:system-ui,sans-serif;margin:24px;background:#fff}"
+      "section{margin-bottom:28px}h2{font-size:14px;margin:0 0 8px;color:#444}"
+      ".row{display:flex;flex-wrap:wrap;gap:14px}"
+      "figure{margin:0;text-align:center}"
+      ".seal{display:grid;place-items:center;height:150px}"
+      "figcaption{font-size:10px;color:#666;margin-top:2px}</style></head><body>"
+      (str/join
+       (for [font fonts]
+         (str "<section><h2>" font "</h2><div class=\"row\">"
+              (str/join (map #(cell font %) samples))
+              "</div></section>")))
+      "</body></html>"))
