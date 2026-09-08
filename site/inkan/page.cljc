@@ -24,7 +24,7 @@
   - **外部リクエストは webfont だけ**。DADS 自体は外部リクエストゼロが既定だが、
     印影の書体は Google Fonts の OFL フォントに依存するのでここだけ opt-in する
     （書体こそがこの道具の中身なので、これは落とせない）。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [jp-go-dds.core :as dds]
             [jp-go-dds.page :as dds-page]
             [inkan.geometry :as geometry]))

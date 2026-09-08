@@ -6,7 +6,7 @@
 (ns inkan.page-app
   (:require [inkan.geometry :as geometry]
             [inkan.svg :as svg]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (defn- el [id] (.getElementById js/document id))
 (defn- val-of [id] (some-> (el id) .-value))
