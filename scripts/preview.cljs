@@ -8,7 +8,7 @@
 ;;   nbb --classpath src scripts/preview.cljs > /tmp/inkan-preview.html
 (require '[inkan.geometry :as geometry]
          '[inkan.svg :as svg]
-         '[clojure.string :as str])
+         '[kotoba.lang.text :as str])
 
 (def fonts
   ["Shippori Mincho" "Zen Old Mincho" "Yuji Syuku" "Yuji Boku" "Noto Serif JP"])
