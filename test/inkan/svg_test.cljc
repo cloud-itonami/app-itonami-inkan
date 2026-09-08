@@ -1,7 +1,7 @@
 (ns inkan.svg-test
   (:require #?(:clj [clojure.test :refer [deftest is testing]]
                :cljs [cljs.test :refer-macros [deftest is testing]])
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [inkan.geometry :as g]
             [inkan.svg :as svg]))
 
