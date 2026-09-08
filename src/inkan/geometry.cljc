@@ -24,7 +24,7 @@
   一般の書体をそのまま置くと字面が小さく余白だらけで印章に見えないので、
   glyph は `:scale-x`/`:scale-y` を持ち、レンダラが升目に合わせて伸縮する。
   等倍にしたい場合は `:fill-cells? false`。"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ---------------------------------------------------------------- math
 

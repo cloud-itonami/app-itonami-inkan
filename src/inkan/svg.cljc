@@ -15,7 +15,7 @@
   返す**中心座標**から `dy=0.36em` だけ下げてベースラインを置く。0.36em は
   和文の字面がほぼ中央に来る経験値で、canvas 側の
   `textBaseline='middle'` とほぼ一致する。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [inkan.geometry :as geometry]))
 
 (defn- fmt
