@@ -2,3 +2,13 @@
 target/
 node_modules/
 .nrepl-port
+
+# nbb's resolved-dependency cache. Ignoring this is safe HERE and the reason is
+# measured, not assumed: nbb shells out to `bb` to build nbb-deps.jar, so a
+# "cold cache + no bb" machine fails (exit 1, `bb: command not found`) — see
+# docs/operator-quickstart.md §0. That only breaks CI if some CI runs nbb here,
+# and none does: this repo has no .github/workflows and no fleet gate in
+# scripts/fleet-ci/gates.edn targets it (checked 2026-09-10; the two `inkan`
+# hits there are comments about a downstream consumer, isic-6910).
+# If that ever changes, this line is the thing to revisit.
+.nbb/

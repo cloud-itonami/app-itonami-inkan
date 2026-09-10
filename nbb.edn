@@ -1,0 +1,12 @@
+;; nbb reads THIS file and does not read deps.edn (ADR-2609093000).
+;; scripts/preview.cljs runs under nbb and requires kotoba.lang.text, so the
+;; coordinate in deps.edn is invisible to it: measured on e5547c3, the command
+;; the README documents exits 1 with "Could not find namespace: kotoba.lang.text"
+;; while `clojure -M:test` stays green — the JVM suite never loads the .cljs.
+;;
+;; :paths and the sha are COPIED from deps.edn, not chosen here. Keeping them
+;; equal is the point: two declarations of one dependency that disagree are
+;; worse than one that is missing.
+{:paths ["src"]
+ :deps {io.github.kotoba-lang/text
+        {:git/sha "73bdb13ae7a3d004b44bca08be03a3191157a38f"}}}
