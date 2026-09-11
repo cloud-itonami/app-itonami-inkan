@@ -82,7 +82,7 @@ clojure -Sdeps '{:paths ["src" "test"]}' -M \
 目視用のページを別に用意してある:
 
 ```bash
-nbb --classpath src scripts/preview.cljs > /tmp/inkan-preview.html
+nbb --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
 ```
 
 実際にこれで、幾何テストが全通過している状態の `:square-1` が縦横比 4:1 に潰れて
