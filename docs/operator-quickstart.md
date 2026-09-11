@@ -120,7 +120,7 @@ clojure -M -e "(require '[inkan.svg :as svg])
 ## 4. 全 8 種 × 5 書体を目で見る
 
 ```bash
-nbb --classpath src scripts/preview.cljs > /tmp/inkan-preview.html
+nbb --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
 open /tmp/inkan-preview.html
 ```
 
@@ -164,7 +164,7 @@ clojure -M:site -e "(require 'inkan.page) (println :site-loaded)"
 :site-loaded true
 ```
 
-`site/inkan/page.cljc` が <https://itonami.cloud/cloud-itonami/inkan/> のマークアップ。
+`site/inkan/page.cljk` が <https://itonami.cloud/cloud-itonami/inkan/> のマークアップ。
 UI は kotoba-ui ではなく **DADS（デジタル庁デザインシステム）**で、これは
 「印影は印鑑登録・契約・行政手続きの文脈そのもの」というオーナー指示
 （2026-07-30、ADR-2607301300）による明示的な opt-out。**light mode 固定になる**

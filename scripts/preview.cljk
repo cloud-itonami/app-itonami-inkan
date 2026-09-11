@@ -5,7 +5,7 @@
 ;; 見るための面をコードで用意しておく。
 ;;
 ;; Run:
-;;   nbb --classpath src scripts/preview.cljs > /tmp/inkan-preview.html
+;;   nbb --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
 (require '[inkan.geometry :as geometry]
          '[inkan.svg :as svg]
          '[kotoba.lang.text :as str])
