@@ -2,7 +2,7 @@
 ;; scripts/preview.cljk runs under nbb and requires kotoba.lang.text, so the
 ;; coordinate in deps.edn is invisible to it: measured on e5547c3, the command
 ;; the README documents exits 1 with "Could not find namespace: kotoba.lang.text"
-;; while `clojure -M:test` stays green — the JVM suite never loads the .cljs.
+;; while `kbb -M:test` stays green — the JVM suite never loads the .cljs.
 ;;
 ;; :paths and the sha are COPIED from deps.edn, not chosen here. Keeping them
 ;; equal is the point: two declarations of one dependency that disagree are

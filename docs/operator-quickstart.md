@@ -71,7 +71,7 @@ cd app-itonami-inkan
 ## 2. テストを通す
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 ```
@@ -82,7 +82,7 @@ Ran 15 tests containing 357 assertions.
 `deps.edn` を経由せず paths を直接渡す形でも同じ結果になる（README にあるのはこちら）:
 
 ```bash
-clojure -Sdeps '{:paths ["src" "test"]}' -M \
+kbb -Sdeps '{:paths ["src" "test"]}' -M \
   -e "(require 'inkan.geometry-test 'inkan.svg-test 'clojure.test)
       (clojure.test/run-tests 'inkan.geometry-test 'inkan.svg-test)"
 ```
@@ -94,7 +94,7 @@ clojure -Sdeps '{:paths ["src" "test"]}' -M \
 ## 3. 印影を 1 つ作る
 
 ```bash
-clojure -M -e "(require '[inkan.svg :as svg])
+kbb -M -e "(require '[inkan.svg :as svg])
                (spit \"/tmp/seal.svg\"
                  (svg/seal {:kind :round-corporate
                             :text \"株式会社山田商店\"
@@ -120,7 +120,7 @@ clojure -M -e "(require '[inkan.svg :as svg])
 ## 4. 全 8 種 × 5 書体を目で見る
 
 ```bash
-nbb --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
+kbb --backend sci --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
 open /tmp/inkan-preview.html
 ```
 
@@ -157,7 +157,7 @@ open /tmp/inkan-preview.html
 ## 5. 公開サイトのマークアップ
 
 ```bash
-clojure -M:site -e "(require 'inkan.page) (println :site-loaded)"
+kbb -M:site -e "(require 'inkan.page) (println :site-loaded)"
 ```
 
 ```
@@ -178,7 +178,7 @@ markup を返す関数で、HTML に落とすのは配信側の仕事。
 
 | 症状 | 原因 | どうするか |
 |---|---|---|
-| `clojure -M:site` が `Local lib io.github.kotoba-lang/jp-go-dds not found` | `:site` は `:local/root ../../kotoba-lang/jp-go-digital-design-system` を引く。**単体 clone には隣の checkout が無い** | §5 は superproject の中でだけ通る。単体で使うなら §4 まで（ライブラリ本体には影響しない） |
+| `kbb -M:site` が `Local lib io.github.kotoba-lang/jp-go-dds not found` | `:site` は `:local/root ../../kotoba-lang/jp-go-digital-design-system` を引く。**単体 clone には隣の checkout が無い** | §5 は superproject の中でだけ通る。単体で使うなら §4 まで（ライブラリ本体には影響しない） |
 | `nbb ... preview.cljs` が `Could not find namespace: kotoba.lang.text` | `nbb.edn` が無いか `:deps` を欠いている。**nbb は `deps.edn` を読まない**（ADR-2609093000） | `nbb.edn` が repo 直下にあることを確かめる。sha は `deps.edn` と同じ値でなければならない |
 | `nbb` が `/bin/sh: bb: command not found` | 初回の依存解決に babashka が要る（§0） | `bb` を入れるか、`.nbb/` を持ち込む |
 | 印影の書体が指定と違う | フォントが届いていない。SVG はアウトライン化していない | ネットワークを確かめる。確定させたいなら PNG |
