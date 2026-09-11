@@ -72,7 +72,7 @@ GMOサインの電子印鑑（丸-縦／丸-横／丸-日付／角-1〜3列）�
 ## テスト
 
 ```bash
-clojure -Sdeps '{:paths ["src" "test"]}' -M \
+kbb -Sdeps '{:paths ["src" "test"]}' -M \
   -e "(require 'inkan.geometry-test 'inkan.svg-test 'clojure.test)
       (clojure.test/run-tests 'inkan.geometry-test 'inkan.svg-test)"
 ```
@@ -82,7 +82,7 @@ clojure -Sdeps '{:paths ["src" "test"]}' -M \
 目視用のページを別に用意してある:
 
 ```bash
-nbb --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
+kbb --backend sci --classpath src scripts/preview.cljk > /tmp/inkan-preview.html
 ```
 
 実際にこれで、幾何テストが全通過している状態の `:square-1` が縦横比 4:1 に潰れて
