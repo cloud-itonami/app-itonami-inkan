@@ -228,4 +228,4 @@
              :crossorigin "anonymous"}]
    [:script {:type "application/x-scittle" :src "./inkan/geometry.cljk"}]
    [:script {:type "application/x-scittle" :src "./inkan/svg.cljk"}]
-   [:script {:type "application/x-scittle" :src "./page.cljs"}]))
+   [:script {:type "application/x-scittle" :src "./page.cljk"}]))
