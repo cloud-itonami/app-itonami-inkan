@@ -227,5 +227,5 @@
    [:script {:src "https://cdn.jsdelivr.net/npm/scittle@0.6.22/dist/scittle.js"
              :crossorigin "anonymous"}]
    [:script {:type "application/x-scittle" :src "./inkan/geometry.cljk"}]
-   [:script {:type "application/x-scittle" :src "./inkan/svg.cljs"}]
+   [:script {:type "application/x-scittle" :src "./inkan/svg.cljk"}]
    [:script {:type "application/x-scittle" :src "./page.cljs"}]))
