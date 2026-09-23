@@ -6,7 +6,7 @@
   - 縦書きの読み順が右→左・上→下
   - 文字数が変わっても全部の文字が置かれる
   - 升目詰めで文字が重ならない"
-  (:require #?(:clj [clojure.test :refer [deftest is testing]]
+  (:require #?(:clj [kotoba.test :refer [deftest is testing]]
                :cljs [cljs.test :refer-macros [deftest is testing]])
             [inkan.geometry :as g]))
 
