@@ -9,7 +9,7 @@
 
 | § | やること | 確かめる値 |
 |---|---|---|
-| 2 | テストを通す | 15 tests / 357 assertions / 0 failures |
+| 2 | テストを通す | 17 tests / 395 assertions / 0 failures |
 | 3 | 印影を 1 つ作る | `/tmp/seal.svg` が約 2.2 KB |
 | 4 | 全 8 種 × 5 書体を目で見る | HTML 約 54 KB → ブラウザで印章に見える |
 | 5 | 公開サイトのマークアップを読み込む | `:site-loaded true`（superproject の中でだけ） |
@@ -75,7 +75,7 @@ kbb -M:test
 ```
 
 ```
-Ran 15 tests containing 357 assertions.
+Ran 17 tests containing 395 assertions.
 0 failures, 0 errors.
 ```
 

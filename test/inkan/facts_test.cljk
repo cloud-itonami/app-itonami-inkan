@@ -1,0 +1,63 @@
+(ns inkan.facts-test
+  "README と公開サイトは「選べる書体はいずれも OFL」と言っている。その主張を
+  facts.edn の出典に繋ぎ留める:
+
+  - facts.edn が読めて、どの fact も https の出典と取得日を持つ
+  - サイト・プレビュー・既定値が出しうる書体は、1 つ残らず OFL の fact を持つ
+
+  書体を足して出典を足し忘れると、2 つ目が赤くなる。**出典の URL が今も 200 を
+  返すかはここでは測らない**（オフラインで走る検査なので）—— それは facts.edn
+  冒頭の手順で取り直す。"
+  (:require #?(:clj [kotoba.test :refer [deftest is testing]]
+               :cljs [cljs.test :refer-macros [deftest is testing]])
+            #?(:clj [clojure.edn :as edn]
+               :cljs [cljs.reader :as edn])
+            #?(:cljs ["fs" :as fs])
+            [inkan.geometry :as g]))
+
+(defn- slurp* [path]
+  #?(:cljs (.readFileSync fs path "utf8")
+     :clj (slurp path)))
+
+(defn- facts [] (edn/read-string (slurp* "facts.edn")))
+
+(defn- page-fonts
+  "site/inkan/page.cljk の `(def fonts ...)` の :id。同じファイルのフォーム部品も
+  `{:id \"f-size\"}` の形なので、`def fonts` の範囲に絞ってから拾う。"
+  []
+  (let [src (slurp* "site/inkan/page.cljk")
+        body (re-find #"\(def fonts[\s\S]*?\}\]\)" src)]
+    (set (map second (re-seq #"\{:id \"([^\"]+)\"" (or body ""))))))
+
+(defn- preview-fonts
+  "scripts/preview.cljk の `(def fonts [...])` の中身。"
+  []
+  (let [src (slurp* "scripts/preview.cljk")
+        body (second (re-find #"\(def fonts\s*\[([^\]]*)\]" src))]
+    (set (map second (re-seq #"\"([^\"]+)\"" (or body ""))))))
+
+(defn- offered-fonts []
+  (conj (into (page-fonts) (preview-fonts)) (:font-family g/default-spec)))
+
+(deftest every-fact-cites-a-fetched-source
+  (let [{:keys [fonts law]} (facts)
+        all (concat fonts law)]
+    (is (= 5 (count fonts)) "書体の fact の件数（増減したら README の書体一覧も見直す）")
+    (is (seq law))
+    (doseq [f all]
+      (testing (or (:font/family f) (:law/title f))
+        (is (re-find #"^https://" (str (:fact/source f))))
+        (is (re-find #"^\d{4}-\d{2}-\d{2}$" (str (:fact/checked f))))
+        (is (seq (:fact/claim f)))
+        (is (seq (:fact/observed f)))))))
+
+(deftest every-offered-font-has-an-ofl-citation
+  (let [cited (into {} (map (juxt :font/family identity)) (:fonts (facts)))
+        offered (offered-fonts)]
+    ;; 抽出が 0 件になったら、この検査は何も見ていない（page.cljk の形が変わった）。
+    (is (= 5 (count (page-fonts))) "site/inkan/page.cljk から書体を読めていない")
+    (is (= 5 (count (preview-fonts))) "scripts/preview.cljk から書体を読めていない")
+    (doseq [font offered]
+      (testing font
+        (is (contains? cited font) (str font " に出典が無い（facts.edn）"))
+        (is (= "OFL" (:font/license (cited font))))))))
