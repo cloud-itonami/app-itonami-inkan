@@ -1,0 +1,58 @@
+;; facts.edn — the outside facts inkan's README and site assert, each with the
+;; source that settles it.
+;;
+;; Every :fact/source below was fetched on :fact/checked and returned HTTP 200,
+;; and :fact/observed is what the body actually said (not what we expected it
+;; to say). Re-check by fetching the URL; do not edit :fact/observed without
+;; fetching.
+;;
+;; test/inkan/facts_test.cljk ties this file to the code: every font the site
+;; (site/inkan/page.cljk), the preview page (scripts/preview.cljk) and the
+;; geometry default (inkan.geometry/default-spec) can emit must have an OFL
+;; fact here. Adding a font without its licence citation turns that test red —
+;; the README's claim "いずれも OFL" is only as true as this file.
+{:fonts
+ [{:font/family "Shippori Mincho"
+   :font/license "OFL"
+   :fact/claim "Shippori Mincho は SIL Open Font License 1.1 で配布されている"
+   :fact/source "https://raw.githubusercontent.com/google/fonts/main/ofl/shipporimincho/OFL.txt"
+   :fact/source-metadata "https://raw.githubusercontent.com/google/fonts/main/ofl/shipporimincho/METADATA.pb"
+   :fact/observed "OFL.txt: \"SIL OPEN FONT LICENSE Version 1.1\"; METADATA.pb: name: \"Shippori Mincho\" license: \"OFL\""
+   :fact/checked "2026-09-26"}
+  {:font/family "Zen Old Mincho"
+   :font/license "OFL"
+   :fact/claim "Zen Old Mincho は SIL Open Font License 1.1 で配布されている"
+   :fact/source "https://raw.githubusercontent.com/google/fonts/main/ofl/zenoldmincho/OFL.txt"
+   :fact/source-metadata "https://raw.githubusercontent.com/google/fonts/main/ofl/zenoldmincho/METADATA.pb"
+   :fact/observed "OFL.txt: \"SIL OPEN FONT LICENSE Version 1.1\"; METADATA.pb: name: \"Zen Old Mincho\" license: \"OFL\""
+   :fact/checked "2026-09-26"}
+  {:font/family "Yuji Syuku"
+   :font/license "OFL"
+   :fact/claim "Yuji Syuku は SIL Open Font License 1.1 で配布されている"
+   :fact/source "https://raw.githubusercontent.com/google/fonts/main/ofl/yujisyuku/OFL.txt"
+   :fact/source-metadata "https://raw.githubusercontent.com/google/fonts/main/ofl/yujisyuku/METADATA.pb"
+   :fact/observed "OFL.txt: \"SIL OPEN FONT LICENSE Version 1.1\"; METADATA.pb: name: \"Yuji Syuku\" license: \"OFL\""
+   :fact/checked "2026-09-26"}
+  {:font/family "Yuji Boku"
+   :font/license "OFL"
+   :fact/claim "Yuji Boku は SIL Open Font License 1.1 で配布されている"
+   :fact/source "https://raw.githubusercontent.com/google/fonts/main/ofl/yujiboku/OFL.txt"
+   :fact/source-metadata "https://raw.githubusercontent.com/google/fonts/main/ofl/yujiboku/METADATA.pb"
+   :fact/observed "OFL.txt: \"SIL OPEN FONT LICENSE Version 1.1\"; METADATA.pb: name: \"Yuji Boku\" license: \"OFL\""
+   :fact/checked "2026-09-26"}
+  {:font/family "Noto Serif JP"
+   :font/license "OFL"
+   :fact/claim "Noto Serif JP は SIL Open Font License 1.1 で配布されている"
+   :fact/source "https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifjp/OFL.txt"
+   :fact/source-metadata "https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifjp/METADATA.pb"
+   :fact/observed "OFL.txt: \"SIL OPEN FONT LICENSE Version 1.1\"; METADATA.pb: name: \"Noto Serif JP\" license: \"OFL\""
+   :fact/checked "2026-09-26"}]
+
+ :law
+ [{:law/id "412AC0000000102"
+   :law/title "電子署名及び認証業務に関する法律"
+   :fact/claim "電子契約の効力は電子署名法上の電子署名に由来し、その電子署名は「本人が作成したことを示す」「改変を検知できる」の 2 要件で定義される（第 2 条第 1 項）。本人による電子署名がある電磁的記録は真正に成立したものと推定される（第 3 条）。画像としての印影はこのどちらにも当たらない"
+   :fact/source "https://laws.e-gov.go.jp/api/1/lawdata/412AC0000000102"
+   :fact/source-human "https://laws.e-gov.go.jp/law/412AC0000000102"
+   :fact/observed "LawTitle Abbrev=\"電子署名法\": 電子署名及び認証業務に関する法律; 第二条「この法律において「電子署名」とは、電磁的記録…に記録することができる情報について行われる措置であって、次の要件のいずれにも該当するものをいう」; 第三条「…本人による電子署名…が行われているときは、真正に成立したものと推定する」"
+   :fact/checked "2026-09-26"}]}
