@@ -132,7 +132,7 @@ open /tmp/inkan-preview.html
 **通っているテストは、測っていないことについては何も言わない。**
 
 ⚠ **`open` はこの workspace では注意が要る**（多数の Claude セッションが OS
-フォーカスを奪い合う。CLAUDE.md の computer-use 規則）。無人で確かめるなら
+フォーカスを奪い合う。AGENTS.md の computer-use 規則）。無人で確かめるなら
 ヘッドレスで撮る:
 
 ```bash
